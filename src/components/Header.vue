@@ -3,13 +3,30 @@
         <nav class="container">
             <img src="../assets/spotify.png" alt="logo">
         </nav>
+        <Search @selected="updateValue"/>
     </header>
 </template>
 
 <script>
+import Search from '../components/Search';
 export default {
-name: 'Header',
+    components: {
+    Search
+
+  },
+    data () {
+        return {
+            selected : "",
+        }
+    },
+    name: 'Header',
+    methods: {
+    updateValue (playload) {
+      this.selected = playload;
+    }
+  }
 }
+
 </script>
 
 <style lang="scss" scoped>

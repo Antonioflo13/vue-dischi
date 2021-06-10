@@ -20,12 +20,18 @@ name: 'Main',
 components: {
     Card
 },
+props: ["selected"],
 data() {
     return {
         api : 'https://flynn.boolean.careers/exercises/api/array/music',
         albums: [],
         loading:true
 }
+},
+computed: {
+    loadingFalse() {
+        return this.loading;
+    }
 },
 created() {
     axios 

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div v-if="!loading" :loadings="loading" v-on:input="updateValue($event.target.props.loading)">
-      <Header/>
+    <div v-if="!loading">
+      <Header @selected="updateValue"/>
       <Main/>
     </div>
     <Loader v-else />
@@ -25,13 +25,12 @@ export default {
   data() {
     return {
       loading: false,
-      props:[{loading:true}],
+      selected: ""
     }
   },
   methods: {
-    updateValue (props) {
-      this.$emit('input', props.loading);
-      console.log(this.$emit('input', props.loading));
+    updateValue (playload) {
+      this.selected = playload;
     }
   }
 }
