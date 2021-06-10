@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <div v-if="!loading">
+    <div v-show="!loading">
       <Header @selected="updateValue"/>
-      <Main/>
+      <Main @changeLoadingStatus="changeLoading" @transferArray="array" :selected="selected"/>
     </div>
-    <Loader v-else />
+    <Loader v-show="loading"/>
 
   </div>
 </template>
@@ -19,19 +19,25 @@ export default {
   components: {
     Header,
     Main,
-    Loader
-
+    Loader,
   },
   data() {
     return {
-      loading: false,
-      selected: ""
+      loading: true,
+      selected: "",
+      album: []
     }
   },
   methods: {
     updateValue (playload) {
       this.selected = playload;
-    }
+    },
+    changeLoading (status) {
+      this.loading = status;
+    },
+    array (array) {
+      this.album = array;
+    },
   }
 }
 </script>

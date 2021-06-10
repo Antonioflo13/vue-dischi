@@ -12,17 +12,17 @@ import Search from '../components/Search';
 export default {
     components: {
     Search
-
   },
+    name: 'Header',
     data () {
         return {
             selected : "",
         }
     },
-    name: 'Header',
     methods: {
     updateValue (playload) {
-      this.selected = playload;
+        this.selected = playload;
+        this.$emit("selected", this.selected, this.albums);
     }
   }
 }
