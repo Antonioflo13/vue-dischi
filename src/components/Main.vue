@@ -1,8 +1,8 @@
 <template>
     <main>
         <section>
-            <div class="row">
-                <div class="col-lg-3"
+            <div id="flex-center" class="row">
+                <div id="albums" class="col-xs-12 col-md-5 col-lg-2"
                 v-for="(album, index) in albums" :key="index">
                 <Card :albums="album"/>
                 </div>
@@ -24,7 +24,8 @@ data() {
     return {
         api : 'https://flynn.boolean.careers/exercises/api/array/music',
         albums: [],
-    }
+        loading:true
+}
 },
 created() {
     axios 
@@ -32,7 +33,9 @@ created() {
         .then(
             (response) => {
                 this.albums= response.data.response;
-                console.log(this.albums);
+                setTimeout(() => {
+                    this.loading = false;
+                }, 3000);
         }
         )
 }   
@@ -48,9 +51,13 @@ created() {
         section {
             @include wrapper;
         }
-        .card {
-            max-width: 200px;
-            max-height:200px;
+        #flex-center {
+            justify-content: center;
+        }
+        #albums {
+            padding: 1%;
+            margin: 1%;
+            background-color: $darkgrey;
 
         }
     }
