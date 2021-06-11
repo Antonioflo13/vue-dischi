@@ -1,11 +1,12 @@
 <template>
     <div class="container pb-2 d-flex justify-content-end">
-    <select name="" id="" class="form-select" v-model="selected" @change="selectedValue">
-        <option selcted disabled value="All">Seleziona il genere</option>
-        <option value="Pop">Pop</option>
-        <option value="Rock">Rock</option>
-        <option value="Jazz">Jazz</option>
-        <option value="Metal">Metal</option>
+    <select name="" id="" class="form-select" v-model="selectedGenre" @change="selectedValue">
+        <option selcted disabled value="All" >Seleziona il genere</option>
+        <option v-for="(genre,index) in genres" :key="index" :value="genre">{{genre}}</option>
+    </select>
+    <select name="" id="" class="form-select" v-model="selectedArtist" @change="selectedValue">
+        <option selcted disabled value="All" >Seleziona Artista</option>
+        <option v-for="(album,index) in album" :key="index" :value="album.author">{{album.author}}</option>
     </select>
     </div>
 </template>
@@ -13,15 +14,16 @@
 <script>
 export default {
     name:"Search",
-    props: ["loading"],
+    props: ['album',"genres"],
     data () {
         return {
-            selected : "",
+            selectedGenre : "",
+            selectedArtist : "",
         }
     },
     methods: {
     selectedValue () {
-        this.$emit("selected", this.selected);
+        this.$emit("selected", this.selectedGenre, this.selectedArtist);
     }
   }
 }
@@ -30,9 +32,10 @@ export default {
 <style lang="scss" scoped>
     @import '../style/variables.scss';
     select {
-        background-color: $txtgrey;
-        border: none;
-        width: 10%;
+        width: 20%;
         height: 1%;
+        margin: 1%;
+        border: none;
+        background-color: $txtgrey;
     }
 </style>

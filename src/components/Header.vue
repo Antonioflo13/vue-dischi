@@ -1,9 +1,9 @@
 <template>
-    <header>
-        <nav class="container">
+    <header class="d-flex">
+        <nav class="container d-flex align-items-center">
             <img src="../assets/spotify.png" alt="logo">
+            <Search @selected="updateValue" :genres="genres" :album="album"/>
         </nav>
-        <Search @selected="updateValue"/>
     </header>
 </template>
 
@@ -14,15 +14,18 @@ export default {
     Search
   },
     name: 'Header',
+    props: ["album", "genres"],
     data () {
         return {
-            selected : "",
+            selectedGenre : "",
+            selectedArtist : "",
         }
     },
     methods: {
-    updateValue (playload) {
-        this.selected = playload;
-        this.$emit("selected", this.selected, this.albums);
+    updateValue (genre, artist) {
+        this.selectedGenre = genre;
+        this.selectedArtist = artist;
+        this.$emit("selected", this.selectedGenre,this.selectedArtist);
     }
   }
 }
@@ -32,6 +35,7 @@ export default {
 <style lang="scss" scoped>
     @import '../style/variables.scss';
     header {
+        height: 20vh;
         background-color: $darkgrey;
     }
     nav {

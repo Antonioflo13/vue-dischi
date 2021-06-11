@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div v-show="!loading">
-      <Header @selected="updateValue"/>
-      <Main @changeLoadingStatus="changeLoading" @transferArray="array" :selected="selected"/>
+      <Header @selected="updateValue" :album="album" :genres="genres"/>
+      <Main @changeLoadingStatus="changeLoading" @transferArray="array" :selectedGenre="selectedGenre" :selectedArtist="selectedArtist"/>
     </div>
     <Loader v-show="loading"/>
 
@@ -24,19 +24,23 @@ export default {
   data() {
     return {
       loading: true,
-      selected: "",
-      album: []
+      selectedGenre: "",
+      selectedArtist: "",
+      album: [],
+      genres: []
     }
   },
   methods: {
-    updateValue (playload) {
-      this.selected = playload;
+    updateValue (genre, artist) {
+      this.selectedGenre = genre;
+      this.selectedArtist = artist;
     },
     changeLoading (status) {
       this.loading = status;
     },
-    array (array) {
-      this.album = array;
+    array (album,genres) {
+      this.album = album;
+      this.genres = genres;
     },
   }
 }

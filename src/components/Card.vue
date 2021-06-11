@@ -18,7 +18,6 @@ props: ["albums"],
 <style lang="scss" scoped>
     @import '../style/variables.scss';
     img {
-        
         width: 100%;
         height: 100%;
     }
